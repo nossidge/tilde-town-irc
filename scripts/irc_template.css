@@ -1,0 +1,27 @@
+
+/* Black background */
+a, a:active {text-decoration: underline; color: inherit;}
+a:visited {text-decoration: none; color: #B6B6B6;}
+.userlink a, .userlink a:active {text-decoration: none; color: inherit;}
+.userlink a:visited {text-decoration: none; color: inherit;}
+.td_date a, .th_date a:active {text-decoration: none; color: inherit;}
+.td_date a:visited {text-decoration: none; color: #B6B6B6;}
+a:hover, a:focus {text-decoration: underline;}
+body {background-color: black; color: #E6E6E6; font: 100% monospace;}
+h2 {margin-bottom: 12px; font: 200% monospace;}
+p {margin-bottom: 12px; font: 110% monospace;}
+table {margin-left: 12px;}
+th {cursor: pointer;}
+th, td {font: 120% monospace; text-align: left;}
+th {font-weight: bold; padding-right: 14px; padding-bottom: 3px;}
+td {padding-right: 14px; vertical-align: top; text-align: left;}
+th.ht {min-width: 166px;}
+th.hu {min-width: 80px;}
+td.t {cursor: pointer;}
+td.td_lines {text-align: right;}
+td.td_users {text-align: right;}
+div.list {background-color: #252525; border-top: 1px solid #646464; border-bottom: 1px solid #646464; padding-top: 10px; padding-bottom: 14px;}
+div.foot {font: 90% monospace; color: #787878; padding-top: 4px;}
+
+/* User styles, randomly generated */
+/* USER_STYLES */

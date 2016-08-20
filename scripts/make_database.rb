@@ -27,11 +27,15 @@ def chat_log_to_sql_import_format(file_to_read)
           chat_text = array[2..-1].join("\t")
           
           # Sanitise the users a wee bit.
-          user = 'jumblesale' if user == 'jumblesal'
-          user = 'endorphant' if user == 'endorphan'
-          user = 'minerobber' if user == 'minerobbe'
-          user = 'staplebutter' if user == 'staplebut'
-          user = 'brighty' if user == 'brightclo'
+          user = case user
+            when 'jumblesal'   ; 'jumblesale'
+            when 'endorphan'   ; 'endorphant'
+            when 'minerobbe'   ; 'minerobber'
+            when 'staplebut'   ; 'staplebutter'
+            when 'brightclo'   ; 'brighty'
+            when 'is_the'      ; 'brighty'
+            else               ;  user
+          end
           
           # Output using tab separators.
           fo.puts "#{time_stamp}\t\"#{user}\"\t\"#{chat_text}\""

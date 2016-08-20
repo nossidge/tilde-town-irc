@@ -10,8 +10,9 @@
 class TildeUsers
   attr_reader :all_usernames, :humans, :robots
 
-  @@known_bots = %w{banterbot cndorphbot empirebot funnybot kbot minerbot nb
-                    nodebot numberwang_bot quote_bot tildebot topicbot umbot
+  @@known_bots = %w{banterbot cndorphbot cosnok demobot empirebot
+                    funnybot kbot minerbot nb nodebot numberwang_bot
+                    quote_bot rubot testbot tildebot topicbot umbot
                     waiterbot}
   @@ignore = %w{(.*) irssi weechat yourname}
 
@@ -38,6 +39,7 @@ class TildeUsers
   def tilde_name(name)
     case name
       when 'brightclo'   ; 'brighty'
+      when 'is_the'      ; 'brighty'
       when 'DankRank'    ; 'dankrank'
       when 'endorphan'   ; 'endorphant'
       when 'epicmorph'   ; 'epicmorphism'

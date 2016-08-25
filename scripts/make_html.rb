@@ -6,6 +6,7 @@
 # Read the IRC logs from the database, into html tables by month, then day.
 ################################################################################
 
+require 'uri'
 require_relative 'database.rb'
 require_relative 'tilde_users.rb'
 
@@ -37,27 +38,34 @@ end
 
 ################################################################################
 
-# Surround plaintext hyperlinks with <a> tags.
-# Surrounds anything starting with http or www.
-# If the url is too long, then truncate it.
-# Only handles one link per string.
 class String
-  def anchor_links!
-    def private_anchor_links(text,link_regex)
-      max_url_len = 80
-      replace_matched = matched = text.match(link_regex).to_s
-      if matched.length >= max_url_len
-        replace_matched = matched[0..max_url_len] + '...'
-      end
-      text.sub!(matched,"<a href='#{matched}'>#{replace_matched}</a>")
-    end
 
-    # To prevent replacing 'www.'... inside existing 'http://'...
-    if self =~ /(https?:\/\/[^\s]+)/
-      self.replace private_anchor_links(self,/(https?:\/\/[^\s]+)/)
-    elsif self =~ /(www.[^\s]+)/
-      self.replace private_anchor_links(self,/(www.[^\s]+)/)
-    end
+  # Find all hyperlinks in a string.
+  # Matches anything starting with http or www.
+  def hyperlinks
+    temp = self.clone
+    links = URI.extract(temp, ['http', 'https'])
+    links.each { |url| temp.sub!(url, '') }
+    links += temp.scan(/(?<=[^a-zA-Z0-9])(www\.[^\s]+)/).flatten
+  end
+
+  # Surround plaintext hyperlinks with <a> tags.
+  # Surrounds anything starting with http or www.
+  # If the url is too long, then truncate it.
+  def anchor_html
+    max_url_len = 80
+    hyperlinks = self.hyperlinks
+    self.split(' ').map do |word|
+      if hyperlinks.include? word
+        text = word
+        if word.length >= max_url_len
+          text = word[0..max_url_len] + '...'
+        end
+        "<a href='#{word}'>#{text}</a>"
+      else
+        word
+      end
+    end.join(' ')
   end
 end
 
@@ -118,7 +126,7 @@ def write_chat_to_html(date_yyyymmdd)
     chat_text = CGI.escapeHTML chat_text
 
     # Hyperlink anything starting with http or www.
-    chat_text.anchor_links!
+    chat_text = chat_text.anchor_html
 
     # Add row to the array.
     out = html_tr

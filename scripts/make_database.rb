@@ -58,10 +58,10 @@ def create_database(sql_import = 'temp_sql_import.txt')
   # Write SQL and SQLite instructions to temp file.
   # Import to database.
   # Delete temp file.
-  sql = %Q~CREATE TABLE IF NOT EXISTS tblFullLogs (timeStamp DATETIME, userName TEXT, chatText TEXT) ;
+  sql = %[ CREATE TABLE IF NOT EXISTS irc (datetime_unix DATETIME, user_name TEXT, chat_text TEXT) ;
     .separator "\t"
-    .import #{sql_import} tblFullLogs
-  ~.gsub('    ','')
+    .import #{sql_import} irc
+  ].gsub('    ','')
   File.open('temp_sql_import.sql','w') { |fo| fo.write sql }
   `sqlite3 #{$db_file} < temp_sql_import.sql`
   File.delete('temp_sql_import.sql')

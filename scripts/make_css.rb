@@ -11,16 +11,6 @@ require_relative 'database.rb'
 
 ################################################################################
 
-def get_users
-  users = []
-  $db.execute("SELECT DISTINCT userName FROM tblFullLogs") do |row|
-    users << row[0].downcase
-  end
-  users.sort
-end
-
-################################################################################
-
 # Generate colours for each user.
 css = []
 get_users.each do |i|

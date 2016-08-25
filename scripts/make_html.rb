@@ -114,7 +114,7 @@ def write_chat_to_html(date_yyyymmdd)
     user_name = row[1].downcase
     chat_text = row[2]
     
-    # Add username to the array.
+    # Add user_name to the array.
     users << user_name
     
     # Fix string encoding issues.
@@ -172,9 +172,7 @@ end
 ################################################################################
 
 # Get a list of all dates in the database.
-sql_select =
-  "SELECT DISTINCT strftime('%Y%m%d', timeStamp, 'unixepoch') FROM tblFullLogs"
-dates_yyyymmdd = $db.execute(sql_select).map(&:first)
+dates_yyyymmdd = get_dates
 
 # For each date, make an HTML document.
 dates_yyyymmdd.each do |d|

@@ -34,6 +34,7 @@ def chat_log_to_sql_import_format(file_to_read)
             when 'staplebut'   ; 'staplebutter'
             when 'brightclo'   ; 'brighty'
             when 'is_the'      ; 'brighty'
+            when 'wes'         ; 'tahnok'
             else               ;  user
           end
           

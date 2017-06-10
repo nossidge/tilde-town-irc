@@ -13,7 +13,7 @@ class TildeUsers
   @@known_bots = %w{banterbot cndorphbot cosnok demobot empirebot
                     funnybot kbot minerbot nb nodebot numberwang_bot
                     quote_bot rubot testbot tildebot topicbot umbot
-                    waiterbot pinhook}
+                    waiterbot pinhook bucket}
   @@ignore = %w{(.*) irssi weechat yourname}
 
   def initialize(all_usernames)

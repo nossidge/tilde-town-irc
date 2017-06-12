@@ -56,6 +56,7 @@ class TildeUsers
       when 'staplebut'   ; 'staplebutter'
       when 'synergian'   ; 'synergiance'
       when 'Zeether'     ; 'zeether'
+      when 'Lil-G'       ; 'lilggamegenuis'
       else               ;  name
     end
   end
